@@ -1,6 +1,6 @@
 package Text::SpamAssassin;
 BEGIN {
-  $Text::SpamAssassin::VERSION = '2.000';
+  $Text::SpamAssassin::VERSION = '2.001';
 }
 
 use 5.006;
@@ -30,6 +30,13 @@ sub new {
     $self->{analyzer}->compile_now if not $opts{lazy};
 
     return $self;
+}
+
+sub DESTROY {
+    my ($self) = @_;
+
+    local $@;
+    eval { $self->{analyzer}->finish };
 }
 
 sub reset {
@@ -107,8 +114,9 @@ sub analyze {
     my ($self) = @_;
 
     my $msg = $self->_generate_message;
-
     my $status = $self->{analyzer}->check($msg);
+    $msg->finish;
+
     if (! $status) {
         return {
             verdict => 'UNKNOWN',
@@ -234,7 +242,7 @@ Text::SpamAssassin - Detects spamminess of arbitrary text, suitable for wiki and
 
 =head1 VERSION
 
-version 2.000
+version 2.001
 
 =head1 SYNOPSIS
 

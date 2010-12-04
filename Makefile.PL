@@ -28,7 +28,7 @@ my %WriteMakefileArgs = (
     'Mail::Internet' => '0',
     'Mail::SpamAssassin' => '2'
   },
-  'VERSION' => '2.000',
+  'VERSION' => '2.001',
   'test' => {
     'TESTS' => 't/*.t'
   }

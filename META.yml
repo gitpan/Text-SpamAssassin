@@ -22,4 +22,4 @@ requires:
 resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Text-SpamAssassin
   repository: git://github.com/robn/Text-SpamAssassin.git
-version: 2.000
+version: 2.001
